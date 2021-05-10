@@ -1,0 +1,9 @@
+\c database_1
+SELECT * from the_table;
+DELETE from the_table;
+
+\c database_2
+SELECT * from other_table;
+
+\c database_1
+SELECT * from the_table;
