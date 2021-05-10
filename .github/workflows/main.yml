@@ -5,10 +5,8 @@ name: Releases
 # Controls when the action will run. 
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  release:
+    types: [ released ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -38,5 +36,6 @@ jobs:
           key: ${{ runner.os }}-node${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
       - name: Install pnpm
         run: curl -f https://get.pnpm.io/v6.js | node - add --global pnpm@6
-      - name: pnpm Build
-        run: pnpm install
+      - run: pnpm install 
+      - run: pnpm run build
+      - run: pnpm publish
